@@ -25,7 +25,7 @@ async def media_receive_handler(_, m: Message):
     file = detect_type(m)
     file_name = ''
     if file:
-        file_name = file.file_name or datetime.now().timestamp()
+        file_name = file.file_name or int(datetime.strftime(datetime.utcnow(), "%s"))
     print("file-name==========: ", file_name)
     log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
     stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
