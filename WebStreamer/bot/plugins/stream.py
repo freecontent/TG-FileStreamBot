@@ -1,6 +1,7 @@
 # This file is a part of TG-FileStreamBot
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
+from datetime import datetime
 from pyrogram import filters
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
@@ -24,7 +25,7 @@ async def media_receive_handler(_, m: Message):
     file = detect_type(m)
     file_name = ''
     if file:
-        file_name = file.file_name or 'Telegram : @my_channels_list_official'
+        file_name = file.file_name or datetime.now().timestamp()
     print("file-name==========: ", file_name)
     log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
     stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
