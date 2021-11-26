@@ -24,10 +24,7 @@ async def media_receive_handler(_, m: Message):
     file = detect_type(m)
     file_name = ''
     if file:
-        if hasattr(file, 'file_name'):
-            file_name = file.file_name
-        else:
-            file_name = 'Telegram : @my_channels_list_official'
+        file_name = file.file_name or 'Telegram : @my_channels_list_official'
     print("file-name==========: ", file_name)
     log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
     stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
